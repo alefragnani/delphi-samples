@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{33374DBE-E62C-4CCE-BD94-0CC922FFEDED}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="GenericVisualizerIDE.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Test\ProjectConsole.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="GenericVisualizerIDE">
+        <MSBuild Projects="GenericVisualizerIDE.dproj"/>
+    </Target>
+    <Target Name="GenericVisualizerIDE:Clean">
+        <MSBuild Projects="GenericVisualizerIDE.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="GenericVisualizerIDE:Make">
+        <MSBuild Projects="GenericVisualizerIDE.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ProjectConsole">
+        <MSBuild Projects="Test\ProjectConsole.dproj"/>
+    </Target>
+    <Target Name="ProjectConsole:Clean">
+        <MSBuild Projects="Test\ProjectConsole.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ProjectConsole:Make">
+        <MSBuild Projects="Test\ProjectConsole.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="GenericVisualizerIDE;ProjectConsole"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="GenericVisualizerIDE:Clean;ProjectConsole:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="GenericVisualizerIDE:Make;ProjectConsole:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
